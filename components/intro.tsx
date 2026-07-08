@@ -1,14 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import authorImage from '@/public/images/authors/pankaj.jpg'
+import authorImage from '@/public/images/authors/pankaj.png'
 
 export default function Intro() {
   return (
     <section className="mt-12 flex flex-col-reverse items-start justify-between gap-8 pb-24 md:flex-row md:items-center">
       {/* Content */}
       <div className="max-w-2xl">
-        <h1 className="title no-underline leading-tight font-mono">
+        <h1 className="title font-mono leading-tight no-underline">
           Hey, I&apos;m Pankaj.
         </h1>
 
@@ -43,7 +43,7 @@ export default function Intro() {
           width={200}
           height={200}
           priority
-          className="rounded-2xl object-cover shadow-m transition duration-300  hover:grayscale-50"
+          className="transform rounded-2xl object-cover shadow-2xl ring-2 ring-slate-800 transition-all duration-500 ease-in-out hover:scale-[1.02] hover:opacity-85"
         />
       </div>
     </section>
