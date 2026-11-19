@@ -40,26 +40,36 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: 'The selected file is not a valid PDF.' }, { status: 400 })
       }
       path = 'public/resume.pdf'
-    } else if (type === 'project-image') {
-      const slug = Slug.safeParse(form.get('slug'))
+    } else if (type === 'project-image' || type === 'profile-image' || type === 'post-image') {
       const extension = imageExtension(bytes)
-      if (!slug.success || !extension) {
+      const needsSlug = type === 'project-image' || type === 'post-image'
+      const slug = needsSlug ? Slug.safeParse(form.get('slug')) : undefined
+      if (!extension || (needsSlug && (!slug || !slug.success))) {
         return NextResponse.json(
-          { error: 'Choose a PNG, JPEG, or WebP screenshot and a valid project slug.' },
+          { error: 'Choose a valid PNG, JPEG, or WebP image.' },
           { status: 400 }
         )
       }
-      const filename = `${slug.data}-${Date.now()}.${extension}`
-      path = `public/images/projects/${filename}`
-      publicPath = `/images/projects/${filename}`
+      const filename = type === 'profile-image'
+        ? `profile-${Date.now()}.${extension}`
+        : `${slug && slug.success ? slug.data : 'entry'}-${Date.now()}.${extension}`
+      const directory = type === 'profile-image' ? 'authors' : type === 'post-image' ? 'posts' : 'projects'
+      path = `public/images/${directory}/${filename}`
+      publicPath = `/images/${directory}/${filename}`
     } else {
-      return NextResponse.json({ error: 'Choose a resume or project image upload.' }, { status: 400 })
+      return NextResponse.json({ error: 'Choose a resume, profile, project, or post image upload.' }, { status: 400 })
     }
 
     await writeRepositoryFile(
       path,
       bytes.toString('base64'),
-      type === 'resume' ? 'Update resume PDF' : 'Upload project image'
+      type === 'resume'
+        ? 'Update resume PDF'
+        : type === 'profile-image'
+          ? 'Upload profile photo'
+          : type === 'post-image'
+            ? 'Upload post image'
+            : 'Upload project image'
     )
 
     return NextResponse.json({ ok: true, path: publicPath })

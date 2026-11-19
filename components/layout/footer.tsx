@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { GitHubLogoIcon, LinkedInLogoIcon } from '@radix-ui/react-icons'
 import { SiCodeforces } from 'react-icons/si'
+import siteContent from '@/content/site.json'
 
 export default function Footer() {
   return (
@@ -15,29 +16,20 @@ export default function Footer() {
             </Link>
 
             <ul className="text-muted-foreground flex items-center gap-6 text-sm font-light">
-              <li className="hover:text-foreground transition-colors">
-                <Link href="/posts">Posts</Link>
-              </li>
-
-              <li className="hover:text-foreground transition-colors">
-                <Link href="/projects">Projects</Link>
-              </li>
-
-              <li className="hover:text-foreground transition-colors">
-                <Link href="/contact">Contact</Link>
-              </li>
-
-              <li className="hover:text-foreground transition-colors">
-                <Link href="/services">Services</Link>
-              </li>
+              {siteContent.header.links.filter(link => link.href !== '/resume.pdf').map(link => (
+                <li key={link.label} className="hover:text-foreground transition-colors">
+                  <Link href={link.href}>{link.label}</Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Right */}
           <div className="text-muted-foreground flex items-center gap-4">
             <Link
-              href="https://www.linkedin.com/in/pankaj025"
+              href={siteContent.social.linkedin}
               target="_blank"
+              rel="noreferrer"
               className="hover:text-foreground transition-colors"
               aria-label="LinkedIn"
             >
@@ -45,8 +37,9 @@ export default function Footer() {
             </Link>
 
             <Link
-              href="https://github.com/Pankajkantghz"
+              href={siteContent.social.github}
               target="_blank"
+              rel="noreferrer"
               className="hover:text-foreground transition-colors"
               aria-label="GitHub"
             >
@@ -54,8 +47,9 @@ export default function Footer() {
             </Link>
 
             <Link
-              href="https://codeforces.com/profile/pankaj_c"
+              href={siteContent.social.codeforces}
               target="_blank"
+              rel="noreferrer"
               className="hover:text-foreground transition-colors"
               aria-label="Codeforces"
             >
@@ -63,8 +57,9 @@ export default function Footer() {
             </Link>
 
             <Link
-              href="https://leetcode.com/u/pankaj_c"
+              href={siteContent.social.leetcode}
               target="_blank"
+              rel="noreferrer"
               className="hover:text-foreground flex items-center gap-1 text-xs transition-colors"
             >
               <Image
@@ -77,8 +72,9 @@ export default function Footer() {
             </Link>
 
             <Link
-              href="https://www.geeksforgeeks.org/user/pankajkantghz"
+              href={siteContent.social.geeksforgeeks}
               target="_blank"
+              rel="noreferrer"
               className="hover:text-foreground flex items-center gap-1 text-xs transition-colors"
             >
               <Image
@@ -94,7 +90,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <p className="text-muted-foreground mt-12 flex justify-center text-xs">
-          © {new Date().getFullYear()} Pankaj Yadav. All rights reserved.
+          © {new Date().getFullYear()} {siteContent.footer.copyrightName}. All rights reserved.
         </p>
       </div>
     </footer>

@@ -1,41 +1,19 @@
-export default function ExperienceSection() {
-  const experiences = [
-    {
-      role: 'Software Developer',
-      company: 'EklavyaSolution',
-      duration: 'Oct 2024 – Jul 2026',
-      points: [
-        'Developed responsive interfaces with React, Next.js, Redux, and Tailwind CSS, including routing, dashboards, and authentication workflows; contributed to a 30% revenue increase.',
-        'Designed and optimized REST APIs and CRUD operations with Node.js and Express, improving backend reliability and reducing application load times by 20%.',
-        'Strengthened application security with rate limiting, domain filtering, input sanitization, encrypted communication, and secure error handling.',
-      ],
-    },
-    {
-      role: 'Software Development Intern',
-      company: 'EklavyaSolution',
-      duration: 'May 2024 – Oct 2024',
-      points: [
-        'Developed interactive, responsive UI components with React and Redux to improve user workflows and application usability.',
-        'Integrated frontend features with backend services through REST APIs.',
-        'Collaborated with senior engineers on application features and functionality.',
-      ],
-    },
-  ]
+import siteContent from '@/content/site.json'
 
+export default function ExperienceSection() {
   return (
     <section className='pb-24'>
       <div className='mb-12'>
-        <h2 className='title mb-4 font-mono'>Experience</h2>
+        <h2 className='title mb-4 font-mono'>{siteContent.experience.title}</h2>
         <p className='text-sm text-muted-foreground'>
-          Experience building responsive interfaces, reliable APIs, and secure
-          web application features.
+          {siteContent.experience.description}
         </p>
       </div>
 
       <div className='space-y-4'>
-        {experiences.map(exp => (
+        {siteContent.experience.items.map((exp, index) => (
           <div
-            key={exp.role}
+            key={`${exp.role}-${exp.company}-${index}`}
             className='rounded-lg border border-border p-5'
           >
             {/* Header */}
@@ -51,9 +29,9 @@ export default function ExperienceSection() {
 
             {/* Bullet points as simple list */}
             <ul className='mt-4 space-y-1.5'>
-              {exp.points.map(point => (
+              {exp.points.map((point, pointIndex) => (
                 <li
-                  key={point}
+                  key={`${exp.role}-${pointIndex}`}
                   className='flex items-start gap-2 text-sm text-muted-foreground'
                 >
                   <span className='mt-1.5 h-1 w-1 shrink-0 rounded-full bg-muted-foreground' />

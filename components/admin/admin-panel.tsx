@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect, useState, type FormEvent } from 'react'
+import WebsiteEditor from '@/components/admin/website-editor'
+import PostsEditor from '@/components/admin/posts-editor'
 
 type SkillCategory = { title: string; items: string[] }
 type ProjectDraft = {
@@ -12,7 +14,7 @@ type ProjectDraft = {
   body: string
 }
 type Project = ProjectDraft
-type Tab = 'projects' | 'skills' | 'resume'
+type Tab = 'website' | 'projects' | 'posts' | 'skills' | 'resume'
 
 const blankProject = (): ProjectDraft => ({
   slug: '',
@@ -30,7 +32,7 @@ export default function AdminPanel() {
   const [checking, setChecking] = useState(true)
   const [authenticated, setAuthenticated] = useState(false)
   const [password, setPassword] = useState('')
-  const [tab, setTab] = useState<Tab>('projects')
+  const [tab, setTab] = useState<Tab>('website')
   const [projects, setProjects] = useState<Project[]>([])
   const [skills, setSkills] = useState<SkillCategory[]>([])
   const [selectedSlug, setSelectedSlug] = useState('')
@@ -284,7 +286,7 @@ export default function AdminPanel() {
       </div>
 
       <div className="flex flex-wrap gap-2 border-b border-border pb-3">
-        {(['projects', 'skills', 'resume'] as const).map(item => (
+        {(['website', 'projects', 'posts', 'skills', 'resume'] as const).map(item => (
           <button
             key={item}
             onClick={() => { setTab(item); setError(''); setNotice('') }}
@@ -297,6 +299,17 @@ export default function AdminPanel() {
 
       {error && <p role="alert" className="rounded-md border border-red-500/30 bg-red-500/5 p-3 text-sm text-red-500">{error}</p>}
       {notice && <p role="status" className="rounded-md border border-border bg-muted/40 p-3 text-sm text-muted-foreground">{notice}</p>}
+
+      <div className={tab === 'website' ? '' : 'hidden'}>
+        <WebsiteEditor />
+      </div>
+      <section className={`space-y-5 ${tab === 'posts' ? '' : 'hidden'}`}>
+          <div>
+            <h2 className="text-lg font-semibold">Posts</h2>
+            <p className="mt-1 text-sm text-muted-foreground">Create, edit, and delete posts. The homepage shows the newest posts first.</p>
+          </div>
+          <PostsEditor />
+      </section>
 
       {tab === 'projects' && (
         <section className="space-y-5">

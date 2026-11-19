@@ -1,0 +1,111 @@
+{
+  "header": {
+    "brand": "PY",
+    "links": [
+      { "label": "Posts", "href": "/posts" },
+      { "label": "Projects", "href": "/projects" },
+      { "label": "Services", "href": "/services" },
+      { "label": "Contact", "href": "/contact" },
+      { "label": "Resume", "href": "/resume.pdf", "external": true }
+    ]
+  },
+  "profile": {
+    "heading": "Hey, I'm Pankaj.",
+    "description": "I’m a Full-Stack Developer building scalable web applications and seamless digital experiences with React, Next.js, Node.js, NestJS, and TypeScript, focusing on performance and clean architecture.",
+    "photo": "/images/authors/pankaj.png",
+    "photoAlt": "Pankaj Yadav",
+    "primaryActionLabel": "View My Projects",
+    "primaryActionHref": "/projects",
+    "secondaryActionLabel": "Hire Me",
+    "secondaryActionHref": "/contact"
+  },
+  "experience": {
+    "title": "Experience",
+    "description": "Experience building responsive interfaces, reliable APIs, and secure web application features.",
+    "items": [
+      {
+        "role": "Software Developer",
+        "company": "EklavyaSolution",
+        "duration": "Oct 2024 – Jul 2026",
+        "points": [
+          "Developed responsive interfaces with React, Next.js, Redux, and Tailwind CSS, including routing, dashboards, and authentication workflows; contributed to a 30% revenue increase.",
+          "Designed and optimized REST APIs and CRUD operations with Node.js and Express, improving backend reliability and reducing application load times by 20%.",
+          "Strengthened application security with rate limiting, domain filtering, input sanitization, encrypted communication, and secure error handling."
+        ]
+      },
+      {
+        "role": "Software Development Intern",
+        "company": "EklavyaSolution",
+        "duration": "May 2024 – Oct 2024",
+        "points": [
+          "Developed interactive, responsive UI components with React and Redux to improve user workflows and application usability.",
+          "Integrated frontend features with backend services through REST APIs.",
+          "Collaborated with senior engineers on application features and functionality."
+        ]
+      }
+    ]
+  },
+  "services": {
+    "title": "Services",
+    "pageTitle": "What I can build for you",
+    "description": "Services I provide for startups, businesses, and modern web applications.",
+    "items": [
+      {
+        "title": "Full Stack Development",
+        "description": "Responsive web applications built with React, Next.js, Node.js, and Express, with PostgreSQL-backed features.",
+        "icon": "Globe"
+      },
+      {
+        "title": "REST API Development",
+        "description": "REST APIs and CRUD workflows using Node.js and Express, with OpenAPI documentation and ownership-based access control.",
+        "icon": "Database"
+      },
+      {
+        "title": "Frontend Development",
+        "description": "Responsive interfaces, dashboards, and authentication flows built with React, Next.js, Redux, TypeScript, and Tailwind CSS.",
+        "icon": "Code2"
+      },
+      {
+        "title": "Performance & Bug Fixes",
+        "description": "Improve application performance and security with load-time optimization, rate limiting, input sanitization, domain filtering, and secure error handling.",
+        "icon": "Wrench"
+      },
+      {
+        "title": "Real-Time Features",
+        "description": "Real-time multiplayer experiences using WebSockets, with server-authoritative game logic and synchronized state.",
+        "icon": "Zap"
+      },
+      {
+        "title": "Authentication & API Integration",
+        "description": "Integrate Google OAuth, external APIs, and services such as grammar checking into web applications.",
+        "icon": "Plug"
+      }
+    ]
+  },
+  "home": {
+    "skillsTitle": "Skills",
+    "skillsDescription": "Technologies, tools, and concepts I use to build scalable modern applications.",
+    "recentProjectsTitle": "Recent projects",
+    "recentPostsTitle": "Recent posts",
+    "recentCount": 4
+  },
+  "contact": {
+    "homeHeading": "Let's build something together",
+    "homeDescription": "I build full-stack web apps, AI-powered tools, and real-time experiences with React, Next.js, Node.js, and TypeScript. Have a project or opportunity in mind? Let's talk.",
+    "actionLabel": "Start a Conversation",
+    "actionHref": "/contact",
+    "email": "pankaj.py96810@gmail.com",
+    "availability": "Open to project inquiries and software development opportunities.",
+    "pageHeading": "Let's talk about your project"
+  },
+  "social": {
+    "github": "https://github.com/Pankajkantghz",
+    "linkedin": "https://www.linkedin.com/in/pankaj025/",
+    "codeforces": "https://codeforces.com/profile/pankaj_c",
+    "leetcode": "https://leetcode.com/u/pankaj_c",
+    "geeksforgeeks": "https://www.geeksforgeeks.org/user/pankajkantghz"
+  },
+  "footer": {
+    "copyrightName": "Pankaj Yadav"
+  }
+}

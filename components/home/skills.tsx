@@ -26,6 +26,7 @@ import {
 } from 'react-icons/si'
 import { Cloud, Code2, Network, Workflow } from 'lucide-react'
 import skills from '@/content/skills.json'
+import siteContent from '@/content/site.json'
 
 type SkillIcon = ComponentType<{ className?: string }>
 
@@ -71,10 +72,9 @@ export default function SkillsSection() {
   return (
     <section className="pb-24">
       <div className="mb-12">
-        <h2 className="title mb-3 font-mono">Skills</h2>
+        <h2 className="title mb-3 font-mono">{siteContent.home.skillsTitle}</h2>
         <p className="text-muted-foreground text-sm">
-          Technologies, tools, and concepts I use to build scalable modern
-          applications.
+          {siteContent.home.skillsDescription}
         </p>
       </div>
 

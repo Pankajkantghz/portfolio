@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import ThemeToggle from './theme-toggle'
 import { useState } from 'react'
+import siteContent from '@/content/site.json'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
@@ -12,33 +13,19 @@ export default function Header() {
       <nav className="container flex max-w-3xl items-center justify-between py-6">
         <div>
           <Link href="/" className="font-sans text-3xl font-extrabold">
-            PY
+            {siteContent.header.brand}
           </Link>
         </div>
 
         {/* Desktop nav */}
         <ul className="text-muted-foreground hidden items-center gap-10 text-sm font-light sm:flex">
-          <li className="hover:text-foreground transition-colors">
-            <Link href="/posts">Posts</Link>
-          </li>
-
-          <li className="hover:text-foreground transition-colors">
-            <Link href="/projects">Projects</Link>
-          </li>
-
-          <li className="hover:text-foreground transition-colors">
-            <Link href="/services">Services</Link>
-          </li>
-
-          <li className="hover:text-foreground transition-colors">
-            <Link href="/contact">Contact</Link>
-          </li>
-
-          <li className="hover:text-foreground transition-colors">
-            <Link href="/resume.pdf" target="_blank">
-              Resume
-            </Link>
-          </li>
+          {siteContent.header.links.map(link => (
+            <li key={link.label} className="hover:text-foreground transition-colors">
+              <Link href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noreferrer' : undefined}>
+                {link.label}
+              </Link>
+            </li>
+          ))}
         </ul>
 
         <div className="flex items-center gap-3">
@@ -78,39 +65,18 @@ export default function Header() {
         }`}
       >
         <ul className="text-muted-foreground container flex flex-col gap-4 pb-6 text-sm font-light">
-          <li className="hover:text-foreground transition-colors">
-            <Link href="/posts" onClick={() => setOpen(false)}>
-              Posts
-            </Link>
-          </li>
-
-          <li className="hover:text-foreground transition-colors">
-            <Link href="/projects" onClick={() => setOpen(false)}>
-              Projects
-            </Link>
-          </li>
-
-          <li className="hover:text-foreground transition-colors">
-            <Link href="/services" onClick={() => setOpen(false)}>
-              Services
-            </Link>
-          </li>
-
-          <li className="hover:text-foreground transition-colors">
-            <Link href="/contact" onClick={() => setOpen(false)}>
-              Contact
-            </Link>
-          </li>
-
-          <li className="hover:text-foreground transition-colors">
-            <Link
-              href="/resume.pdf"
-              target="_blank"
-              onClick={() => setOpen(false)}
-            >
-              Resume
-            </Link>
-          </li>
+          {siteContent.header.links.map(link => (
+            <li key={link.label} className="hover:text-foreground transition-colors">
+              <Link
+                href={link.href}
+                target={link.external ? '_blank' : undefined}
+                rel={link.external ? 'noreferrer' : undefined}
+                onClick={() => setOpen(false)}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </header>

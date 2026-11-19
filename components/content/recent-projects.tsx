@@ -1,14 +1,15 @@
 import Link from 'next/link'
 import { getProjects } from '@/lib/content/projects'
 import Projects from '@/components/content/projects'
+import siteContent from '@/content/site.json'
 
 export default async function RecentProjects() {
-  const projects = await getProjects(4)
+  const projects = getProjects(siteContent.home.recentCount)
 
   return (
     <section className="pb-24">
       <div>
-        <h2 className="title mb-12 font-mono">Recent projects</h2>
+        <h2 className="title mb-12 font-mono">{siteContent.home.recentProjectsTitle}</h2>
         <Projects projects={projects} />
 
         <Link

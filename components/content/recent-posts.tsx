@@ -1,14 +1,15 @@
 import Link from 'next/link'
 import { getPosts } from '@/lib/content/posts'
 import Posts from '@/components/content/posts'
+import siteContent from '@/content/site.json'
 
 export default async function RecentPosts() {
-  const posts = await getPosts(4)
+  const posts = await getPosts(siteContent.home.recentCount)
 
   return (
     <section className="pb-24">
       <div>
-        <h2 className="title mb-12 font-mono">Recent posts</h2>
+        <h2 className="title mb-12 font-mono">{siteContent.home.recentPostsTitle}</h2>
         <Posts posts={posts} />
 
         <Link

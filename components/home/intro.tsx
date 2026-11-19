@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import authorImage from '@/public/images/authors/pankaj.png'
+import siteContent from '@/content/site.json'
 
 export default function Intro() {
   return (
@@ -9,29 +9,27 @@ export default function Intro() {
       {/* Content */}
       <div className="max-w-2xl">
         <h1 className="title font-mono leading-tight no-underline">
-          Hey, I&apos;m Pankaj.
+          {siteContent.profile.heading}
         </h1>
 
         <p className="text-muted-foreground mt-5 max-w-xl text-base leading-relaxed">
-          I’m a Full-Stack Developer building scalable web applications and
-          seamless digital experiences with React, Next.js, Node.js, NestJS, and
-          TypeScript, focusing on performance and clean architecture.
+          {siteContent.profile.description}
         </p>
 
         {/* CTA */}
         <div className="mt-7 flex flex-wrap items-center gap-4">
           <Link
-            href="/projects"
+            href={siteContent.profile.primaryActionHref}
             className="hover:text-foreground text-sm font-medium underline underline-offset-4 transition-all duration-200 hover:scale-103"
           >
-            View My Projects
+            {siteContent.profile.primaryActionLabel}
           </Link>
 
           <Link
-            href="/contact"
+            href={siteContent.profile.secondaryActionHref}
             className="hover:text-foreground text-sm font-medium underline underline-offset-4 transition-all duration-200 hover:scale-103"
           >
-            Hire Me
+            {siteContent.profile.secondaryActionLabel}
           </Link>
         </div>
       </div>
@@ -39,8 +37,8 @@ export default function Intro() {
       {/* Image */}
       <div className="relative">
         <Image
-          src={authorImage}
-          alt="Pankaj"
+          src={siteContent.profile.photo}
+          alt={siteContent.profile.photoAlt}
           width={200}
           height={200}
           priority

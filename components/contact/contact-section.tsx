@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Mail } from 'lucide-react'
 import { GitHubLogoIcon, LinkedInLogoIcon } from '@radix-ui/react-icons'
+import siteContent from '@/content/site.json'
 
 export default function ContactSection() {
   return (
@@ -12,27 +13,25 @@ export default function ContactSection() {
           {/* Heading */}
           <div>
             <h2 className="title font-mono leading-tight">
-              Let&apos;s build something together
+              {siteContent.contact.homeHeading}
             </h2>
 
             <p className="text-muted-foreground mt-3 max-w-md text-sm leading-6">
-              I build full-stack web apps, AI-powered tools, and real-time
-              experiences with React, Next.js, Node.js, and TypeScript. Have a
-              project or opportunity in mind? Let&apos;s talk.
+              {siteContent.contact.homeDescription}
             </p>
           </div>
 
           {/* Actions */}
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              href="/contact"
+              href={siteContent.contact.actionHref}
               className="border-border hover:bg-muted rounded-full border px-5 py-2 text-sm font-medium transition-colors"
             >
-              Start a Conversation
+              {siteContent.contact.actionLabel}
             </Link>
 
             <Link
-              href="mailto:pankaj.py96810@gmail.com"
+              href={`mailto:${siteContent.contact.email}`}
               className="border-border text-muted-foreground hover:bg-muted hover:text-foreground flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition-colors"
             >
               <Mail className="h-4 w-4" />
@@ -40,8 +39,9 @@ export default function ContactSection() {
             </Link>
 
             <Link
-              href="https://www.linkedin.com/in/pankaj025/"
+              href={siteContent.social.linkedin}
               target="_blank"
+              rel="noreferrer"
               aria-label="LinkedIn"
               className="border-border text-muted-foreground hover:bg-muted hover:text-foreground flex h-9 w-9 items-center justify-center rounded-full border transition-colors"
             >
@@ -49,8 +49,9 @@ export default function ContactSection() {
             </Link>
 
             <Link
-              href="https://github.com/Pankajkantghz"
+              href={siteContent.social.github}
               target="_blank"
+              rel="noreferrer"
               aria-label="GitHub"
               className="border-border text-muted-foreground hover:bg-muted hover:text-foreground flex h-9 w-9 items-center justify-center rounded-full border transition-colors"
             >
@@ -60,7 +61,7 @@ export default function ContactSection() {
 
           {/* Footer */}
           <p className="text-muted-foreground text-xs">
-            Open to project inquiries and software development opportunities.
+            {siteContent.contact.availability}
           </p>
         </div>
       </div>

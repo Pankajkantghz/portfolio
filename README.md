@@ -10,7 +10,7 @@ Personal portfolio and blog built with Next.js, React, TypeScript, Tailwind CSS,
 - Project, post, skills, services, and experience pages
 - MDX project writeups and technical posts
 - Contact form with email delivery through Resend
-- Password-protected admin panel for managing projects, skills, and the resume
+- Password-protected admin panel for managing website content, posts, projects, skills, and the resume
 - GitHub-backed admin updates that trigger Vercel deployments
 
 ## Getting started
@@ -57,10 +57,10 @@ For detailed token setup, local admin configuration, and content-management note
 
 Portfolio content is stored in `content/` and static assets are stored in `public/`. You can edit these files directly or use the admin panel after configuring its GitHub credentials.
 
-- **Projects:** create, edit, and delete project entries. Project writeups live in `content/projects/` as MDX.
+- **Website:** edit the header, profile photo and intro, experience, services, contact details, social links, and recent section headings.
+- **Posts and projects:** create, edit, and delete entries; the newest posts appear first.
 - **Skills:** edit categories and skill names stored in `content/skills.json`.
-- **Resume:** upload a replacement PDF or delete the current resume from the admin panel.
-- **Project images:** upload PNG, JPEG, or WebP images from the project editor.
+- **Resume and images:** replace or delete the resume and upload profile, post, and project images.
 
 Each admin change is committed to the configured GitHub branch. When that repository is connected to Vercel, the commit starts a deployment.
 

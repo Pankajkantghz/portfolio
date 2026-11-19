@@ -1,8 +1,8 @@
 # Admin panel setup
 
 The admin panel is available at `/admin`. It uses GitHub as the content store:
-project MDX, skills JSON, resume PDFs, and uploaded project screenshots are
-committed to the configured repository. When the repository is connected to
+website settings, post and project MDX, skills JSON, resume PDFs, and uploaded
+images are committed to the configured repository. When the repository is connected to
 Vercel for deployments, those commits trigger a site redeploy. This setup does
 not require a separate database.
 
@@ -35,12 +35,12 @@ sign in with `ADMIN_PASSWORD`.
 
 ## Managing content
 
+- **Website:** edit the header and navigation, profile copy and photo, experience, services, contact details, social links, and recent-section headings/count.
+- **Posts:** create, edit, or delete MDX entries in `content/posts/`; posts are ordered by published date.
 - **Projects:** create, edit, or delete project MDX files in `content/projects/`.
 - **Skills:** edit the six category lists stored in `content/skills.json`.
-- **Resume:** upload a PDF to replace `public/resume.pdf`.
-- **Project images:** upload PNG, JPEG, or WebP images up to 4 MB. Uploaded
-  images are added under `public/images/projects/` and linked from the project
-  metadata when you save it.
+- **Resume:** upload a PDF to replace or delete `public/resume.pdf`.
+- **Images:** upload PNG, JPEG, or WebP images up to 4 MB for your profile, posts, or projects.
 
 The admin session is stored in an HTTP-only, same-site cookie. Each content
 change is committed to the configured GitHub branch; Vercel publishes it after
