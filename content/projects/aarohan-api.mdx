@@ -7,143 +7,96 @@ author: Pankaj Yadav
 image: /images/projects/aarohan-api-1795118754195.png
 publishedAt: '2026-06-14'
 ---
-----------------------
+------------------------------------------------------------
 
-Aarohan API is a **production-ready backend API** built using the **MERN stack**
-to simulate how a modern backend system works in a real-world application.
+# Aarohan
 
-The platform focuses on secure authentication, role-based authorization,
-content management, admin moderation, analytics, and scalable backend
-architecture. Aarohan API also includes production-level security practices,
-file uploads, and interactive API documentation.
+A full-stack publishing platform that allows readers to discover and discuss articles, authors to create and manage publications, and administrators to moderate content and manage users.
+
+Aarohan is a **full-stack publishing platform** built using the **MERN stack**, providing a complete content management experience with secure authentication, article publishing, and user engagement.
+
+The platform focuses on content management with role-based authorization, secure authentication, and scalable backend architecture. Aarohan also provides author and admin dashboards, article analytics, email verification, and interactive API documentation.
+
+## GitHub Repository
+
+[**Aarohan Source Code →**](https://github.com/Pankajkantghz/roadmapsh-projects-solutions/tree/master/backend-projects-js/6.%20Aarohan)
 
 ## Features
 
-* **Authentication & Authorization**: Secure signup, login, refresh tokens,
-  OTP-based password reset, and protected routes using JWT
-* **Role-Based Access Control**: Separate permissions for `user` and `admin`
-* **Article Management**: Create, update, delete, publish, search, and filter
-  articles with slug-based URLs
-* **Likes & Bookmarks**: Like, dislike, and save articles for later
-* **Comments System**: Add comments, replies, and nested discussions
-* **Admin Dashboard**: Manage users, moderate articles, and view analytics
-* **File Upload Support**: Secure image uploads with Cloudinary
-* **Security Features**: Helmet, bcrypt, secure cookies, rate limiting, and
-  centralized error handling
-* **API Documentation**: Interactive API testing using Swagger UI
+- **Authentication & Authorization**: Secure signup, login, email verification, password recovery, and JWT-based authentication with refresh tokens.
+- **Article Management**: Create, update, delete, publish, search, and filter articles with slug-based URLs.
+- **User Engagement**: Like, dislike, bookmark articles, and participate in discussions through comments and nested replies.
+- **Author Dashboard**: Manage profiles, drafts, published articles, and article analytics.
+- **Admin Dashboard**: Manage users, update roles, moderate content, and monitor platform analytics.
+- **File Uploads**: Upload and manage article images using Cloudinary.
+- **Security**: Password hashing, HTTP-only cookies, Helmet, rate limiting, and request validation.
+- **API Documentation**: Interactive API testing and documentation using Swagger UI.
 
 ## Technologies
 
-* **MongoDB**: Database for storing application data
-* **Express.js**: Backend framework for REST APIs
-* **Node.js**: Server-side JavaScript runtime
-* **Mongoose**: ODM for MongoDB schema modeling
-* **JWT Authentication**: Secure authentication and authorization
-* **bcrypt**: Password hashing and account security
-* **Zod**: Request validation
-* **Helmet**: Security middleware
-* **Express Rate Limit**: API abuse prevention
-* **Cloudinary**: Cloud image storage
-* **Multer**: File upload handling
-* **Swagger UI**: API documentation
-
-## Project Structure
-
-```txt
-backend/
-│── config/
-│   ├── db.js
-│   ├── env.js
-│   ├── swagger.js
-│   └── cloudinary.js
-│
-│── controllers/
-│── middleware/
-│── models/
-│── routes/
-│── services/
-│── utils/
-│── validators/
-│── server.js
-```
+- **MongoDB**: Database for storing users, articles, comments, and application data.
+- **Express.js**: Backend framework for building RESTful APIs.
+- **React 19**: Frontend library for building interactive user interfaces.
+- **Node.js**: Server-side JavaScript runtime.
+- **Mongoose**: ODM for MongoDB schema modeling.
+- **JWT Authentication**: Secure authentication using access and refresh tokens.
+- **bcrypt**: Password hashing and account security.
+- **Zod**: Request validation.
+- **Cloudinary**: Cloud-based image storage.
+- **Multer**: File upload handling.
+- **Nodemailer**: Email verification and password recovery.
+- **Swagger UI**: Interactive API documentation.
+- **Vite**: Frontend development and build tooling.
 
 ## Getting Started
 
-Clone the repository:
+### Backend
 
 ```bash
-git clone <repository-url>
 cd backend
-```
-
-Install dependencies:
-
-```bash
+cp .env.example .env
 npm install
-```
-
-Run the development server:
-
-```bash
 npm run dev
 ```
 
-The API will start at:
+### Frontend
+
+```bash
+cd frontend
+cp .env.example .env
+npm install
+npm run dev
+```
+
+The application runs at:
 
 ```text
-http://localhost:5000
+Frontend: http://localhost:5173
+Backend:  http://localhost:5000
+```
+
+## API Documentation
+
+Explore and test API endpoints using Swagger UI:
+
+```text
+http://localhost:5000/api-docs
 ```
 
 ## Build for Production
+
+Frontend:
+
+```bash
+npm run build
+```
+
+Backend:
 
 ```bash
 npm start
 ```
 
-## Main API Routes
-
-### Authentication
-
-```http
-POST   /api/v1/auth/signup
-POST   /api/v1/auth/login
-POST   /api/v1/auth/logout
-POST   /api/v1/auth/refresh-token
-POST   /api/v1/auth/forgot-password
-POST   /api/v1/auth/verify-otp
-POST   /api/v1/auth/reset-password
-GET    /api/v1/auth/profile
-PATCH  /api/v1/auth/profile
-```
-
-### Articles
-
-```http
-POST   /api/v1/articles
-GET    /api/v1/articles
-GET    /api/v1/articles/:slug
-PATCH  /api/v1/articles/:id
-DELETE /api/v1/articles/:id
-GET    /api/v1/articles/trending
-GET    /api/v1/articles/bookmarks
-POST   /api/v1/articles/:id/like
-POST   /api/v1/articles/:id/dislike
-POST   /api/v1/articles/:id/bookmark
-```
-
-### Comments
-
-```http
-POST   /api/v1/articles/:id/comments
-GET    /api/v1/articles/:id/comments
-POST   /api/v1/comments/:id/reply
-PATCH  /api/v1/comments/:id
-DELETE /api/v1/comments/:id
-```
-
 ## Conclusion
 
-Aarohan API demonstrates how a scalable and secure backend platform can be
-built using modern backend technologies. With authentication, moderation,
-engagement features, and production-level security, the project reflects
-real-world backend engineering practices.
+Aarohan demonstrates how a scalable full-stack publishing platform can be built using the MERN stack. With secure authentication, content management, user engagement, administrative moderation, and analytics, the platform reflects practical real-world full-stack engineering practices.
