@@ -197,6 +197,25 @@ export default function AdminPanel() {
     }
   }
 
+  async function deleteResume() {
+    if (!window.confirm('Delete the current resume PDF?')) return
+
+    setBusy(true)
+    setError('')
+    setNotice('')
+    try {
+      const response = await fetch('/api/admin/resume', { method: 'DELETE' })
+      const result = await response.json()
+      if (!response.ok) throw new Error(result.error || 'Could not delete the resume.')
+      setResumeAvailable(false)
+      setNotice('Resume deleted from GitHub. Vercel will redeploy the portfolio.')
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : 'Could not delete the resume.')
+    } finally {
+      setBusy(false)
+    }
+  }
+
   function chooseProject(slug: string) {
     setSelectedSlug(slug)
     const selected = projects.find(item => item.slug === slug)
@@ -373,7 +392,17 @@ export default function AdminPanel() {
           <label className="block text-sm font-medium">Choose a PDF (maximum 4 MB)
             <input type="file" accept="application/pdf,.pdf" className={`${fieldClass} file:mr-3 file:rounded-full file:border-0 file:bg-muted file:px-3 file:py-1`} onChange={event => handleUpload(event.target.files?.[0], 'resume')} disabled={busy} />
           </label>
-          {busy && <p className="text-sm text-muted-foreground">Uploading…</p>}
+          {busy && <p className="text-sm text-muted-foreground">Updating resume…</p>}
+          {resumeAvailable && (
+            <button
+              type="button"
+              onClick={deleteResume}
+              disabled={busy}
+              className="rounded-full border border-red-500/40 px-5 py-2 text-sm text-red-500 transition-colors hover:bg-red-500/5 disabled:opacity-50"
+            >
+              Delete resume
+            </button>
+          )}
         </section>
       )}
     </div>
