@@ -1,0 +1,133 @@
+---
+title: Multiplayer Chess
+summary: A real-time chess game with WebSocket matchmaking, synchronized play, and time controls.
+image: /images/projects/chess.png
+author: 'Pankaj Yadav'
+publishedAt: '2026-11-19'
+---
+
+## Real-time chess. Live opponents. Instant moves.
+
+Multiplayer Chess lets two players compete online with automatic matchmaking,
+synchronized moves, and independent game clocks. The server maintains each
+active game and validates moves with `chess.js`.
+
+- [Play chess](https://chess-beta-sandy.vercel.app/)
+- [View the source on GitHub](https://github.com/Pankajkantghz/chess)
+- [Backend health check](https://chess-backend-3wti.onrender.com/health)
+
+## Features
+
+- Match players automatically by selected time control.
+- Synchronize moves and game state over persistent WebSocket connections.
+- Support 1, 3, 5, 10, and 25 minute clocks.
+- Validate legal moves and detect checkmate, stalemate, draws, resignation,
+  and timeouts with `chess.js`.
+- Track move history and generate FEN and PGN positions.
+- Handle disconnects and end active games when a player leaves.
+- Validate browser origins during the WebSocket handshake.
+
+## Technology stack
+
+- **Frontend:** React, TypeScript, Vite, Tailwind CSS, and React Chessboard
+- **Backend:** Node.js, TypeScript, and Node.js HTTP
+- **Real-time communication:** WebSocket (`ws`)
+- **Chess rules:** `chess.js`
+- **Hosting:** Vercel and Render
+
+## Architecture
+
+The browser communicates with a Node.js WebSocket server. A game manager
+handles connected players, matchmaking, and active games. Each game instance
+validates moves, maintains clocks and move history, and broadcasts updates to
+both players. Active game state is held in server memory.
+
+## WebSocket protocol
+
+Production endpoint:
+
+```text
+wss://chess-backend-3wti.onrender.com
+```
+
+Local endpoint:
+
+```text
+ws://localhost:8080
+```
+
+Clients can send these JSON messages:
+
+```json
+{ "type": "JOIN_GAME", "timeControl": 5 }
+```
+
+```json
+{ "type": "MOVE", "move": { "from": "e2", "to": "e4" } }
+```
+
+```json
+{ "type": "RESIGN" }
+```
+
+The server responds with events such as `WAITING_FOR_PLAYER`, `INIT_GAME`,
+`MOVE`, `CLOCK`, `INVALID_MOVE`, `GAME_OVER`, and `ERROR`.
+
+## Run locally
+
+Requirements: Node.js, npm, and Git.
+
+1. Clone the repository and install backend dependencies:
+
+   ```bash
+   git clone https://github.com/Pankajkantghz/chess.git
+   cd chess/backend
+   npm install
+   ```
+
+2. Create `backend/.env`:
+
+   ```env
+   PORT=8080
+   ```
+
+3. Start the backend:
+
+   ```bash
+   npm run dev
+   ```
+
+4. In another terminal, install and start the frontend:
+
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+   Set `VITE_WS_URL=ws://localhost:8080` in `frontend/.env`, then run:
+
+   ```bash
+   npm run dev
+   ```
+
+The frontend runs at `http://localhost:5173`. The local frontend can also use
+the deployed backend by setting `VITE_WS_URL` to the production WebSocket URL.
+
+## Deployment and security
+
+The frontend is hosted on Vercel and the backend on Render. The backend shares
+one HTTP server between the health endpoint and WebSocket server. Configure the
+frontend's `VITE_WS_URL` as
+`wss://chess-backend-3wti.onrender.com` and allow the deployed frontend origin
+in the backend's WebSocket origin configuration.
+
+Origin validation limits browser connections to approved sites, but it does
+not authenticate players or protect against non-browser clients on its own.
+
+## Current limitations and roadmap
+
+Games are currently stored in server memory, so active games do not survive a
+server restart and players cannot reconnect to a recovered game. The planned
+next steps are PostgreSQL persistence for games and moves, state recovery,
+Redis-based move processing and Pub/Sub, horizontal WebSocket scaling, and
+spectator support.

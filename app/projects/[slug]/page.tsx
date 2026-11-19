@@ -3,9 +3,9 @@ import { notFound } from 'next/navigation'
 import {
   getProjects,
   getProjectBySlug,
-} from '@/lib/projects'
+} from '@/lib/content/projects'
 
-import MDXContent from '@/components/mdx-content'
+import MDXContent from '@/components/content/mdx-content'
 
 export async function generateStaticParams() {
   const projects = getProjects()

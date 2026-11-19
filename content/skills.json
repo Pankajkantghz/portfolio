@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Programming",
+    "items": ["C++", "Java", "JavaScript", "TypeScript", "SQL"]
+  },
+  {
+    "title": "Frontend",
+    "items": ["React", "Next.js", "Redux", "HTML", "CSS", "Tailwind CSS"]
+  },
+  {
+    "title": "Backend",
+    "items": ["Node.js", "Express", "NestJS", "REST API", "WebSockets", "GraphQL"]
+  },
+  {
+    "title": "Databases",
+    "items": ["MongoDB", "PostgreSQL", "Redis", "Firebase"]
+  },
+  {
+    "title": "Tools",
+    "items": ["Git", "GitHub", "Docker", "Linux", "AWS", "Postman", "Figma", "Groq"]
+  },
+  {
+    "title": "Core CS",
+    "items": ["DSA", "DBMS", "OS", "CN", "System Design", "OOP"]
+  }
+]

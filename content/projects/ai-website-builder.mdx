@@ -1,0 +1,137 @@
+---
+title: AI Website Builder
+summary: An AI-assisted builder that turns prompts into editable, runnable web projects.
+image: /images/projects/ai-website-builder.png
+author: 'Pankaj Yadav'
+publishedAt: '2026-10-26'
+---
+
+## Describe a website. Generate it. Refine it.
+
+The AI Website Builder turns a focused natural-language prompt into project
+files, then lets you inspect and edit the generated code in an interactive
+workspace. Supported projects can run in a browser-based WebContainer preview.
+
+- [Open the builder](https://website-builder-two-murex.vercel.app/)
+- [View the source on GitHub](https://github.com/Pankajkantghz/website-builder)
+
+## Features
+
+- Generate project files from a prompt using Groq's
+  `openai/gpt-oss-20b` model.
+- Start a fresh project with one focused prompt at a time.
+- Inspect generated files in a file explorer and Monaco code editor.
+- Run supported projects in a WebContainer live preview.
+- Sync code edits to the running preview and reinstall dependencies when
+  imports change.
+- Keep generated files, build steps, selected file, and latest prompt in the
+  current browser tab session.
+
+## Technology stack
+
+- **Frontend:** React 19, TypeScript, Vite, and React Router
+- **Styling:** Tailwind CSS
+- **Code editor:** Monaco Editor
+- **In-browser runtime:** WebContainers
+- **Backend:** Node.js, TypeScript, and Express 5
+- **AI:** Vercel AI SDK and Groq
+- **Icons:** Lucide React
+
+## How it works
+
+The frontend sends a prompt to the Express API. The backend asks the configured
+Groq model to generate or update project files and returns file actions. The
+frontend applies those actions to the file tree and mounts supported files in a
+WebContainer, where dependencies are installed and the development server runs
+for the preview.
+
+The backend also exposes `POST /template` for optional starter selection. The
+current frontend does not call this endpoint. A successful new prompt replaces
+the current project; code edits are synced to its running preview.
+
+## API
+
+The frontend calls `https://website-builder-dp0j.onrender.com` by default. Set
+`VITE_API_URL` in the frontend build environment to use a different API URL.
+
+### `POST /template`
+
+Returns starter prompts selected for a request.
+
+```json
+{
+  "prompt": "A portfolio for a product designer"
+}
+```
+
+### `POST /chat`
+
+Generates project file actions from the submitted prompt.
+
+```json
+{
+  "messages": [
+    { "role": "user", "content": "Create a responsive landing page" }
+  ]
+}
+```
+
+The frontend applies the returned actions to the current project tree. API
+errors include a short code and user-facing message.
+
+## Run locally
+
+Requirements: Node.js 22 or newer, npm, a Groq API key, and a browser supported
+by WebContainers.
+
+1. Create `backend/.env`:
+
+   ```env
+   GROQ_API_KEY=your_groq_api_key
+   ```
+
+2. Start the backend:
+
+   ```bash
+   cd backend
+   npm install
+   npm run dev
+   ```
+
+   The backend starts at `http://localhost:3000`.
+
+3. In another terminal, start the frontend:
+
+   ```bash
+   cd frontend
+   npm install
+   npm run dev
+   ```
+
+Open the Vite URL printed in the terminal, usually `http://localhost:5173`.
+
+## Configuration and runtime notes
+
+- Keep `GROQ_API_KEY` in the backend environment, never in frontend variables
+  or source control.
+- The backend CORS policy defaults to `http://localhost:5173`. Configure
+  `CORS_ORIGINS` as a comma-separated list of allowed origins for deployment.
+- The backend limits requests to 20 per IP per minute, template prompts to
+  20,000 characters, chat content to 100,000 characters, and JSON bodies to
+  256 KB. The in-memory rate limiter is per process; multi-instance deployments
+  need a shared rate-limit store.
+- WebContainers require cross-origin isolation. The frontend host must provide
+  `Cross-Origin-Opener-Policy: same-origin` and
+  `Cross-Origin-Embedder-Policy: require-corp` headers.
+- Generated projects run in a browser-based Node.js environment. Packages that
+  require native binaries may not work.
+- The builder stores the current workspace in `sessionStorage` for the browser
+  tab. It has no database-backed project storage, authentication, or
+  cross-device project sync.
+
+## Model limitations
+
+The project uses a free model, so generated responses can be inaccurate or
+incomplete. Review generated code before using it. If Groq reports a quota or
+rate-limit error, the backend responds with HTTP `429` and the code
+`MODEL_QUOTA_EXHAUSTED`.

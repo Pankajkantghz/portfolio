@@ -1,0 +1,120 @@
+---
+title: Mireth — Markdown Notebook
+summary: A private Markdown notebook for writing, organizing, and refining notes.
+image: /images/projects/mireth.png
+author: 'Pankaj Yadav'
+publishedAt: '2026-11-1'
+---
+
+Mireth is a private Markdown notebook for writing and organizing notes. It
+combines a Markdown editor with a live preview, file import, searchable note
+library, and optional grammar suggestions.
+
+## Live App
+
+[Open Mireth](https://mireth.vercel.app/)
+
+## Features
+
+- Sign in with Google and access only notes associated with your account.
+- Write Markdown with a live rendered preview.
+- Import files, search notes, and browse results with pagination.
+- Create, edit, and delete notes.
+- Request grammar suggestions powered by the Sapling API.
+- Use the responsive interface in light or dark themes.
+
+## Technology stack
+
+- **Frontend:** React, TypeScript, Vite, Markdown editor, and live preview
+- **Backend:** Node.js and Express
+- **Data:** PostgreSQL
+- **Authentication:** Google OAuth and HTTP-only session cookies
+- **Integrations:** Sapling grammar API and OpenAPI/Swagger
+- **CI:** GitHub Actions
+
+## Architecture and privacy
+
+The API verifies Google credentials, issues an HTTP-only session cookie, and
+checks note ownership on protected requests. PostgreSQL stores users, sessions,
+notes, and rate-limit counters. Grammar text is sent to Sapling only when a
+grammar check is requested. Google, hosting, database, and grammar providers
+may process data to provide their services; review their privacy terms.
+
+## API
+
+All `/notes` endpoints require sign-in and operate only on the current user's
+notes.
+
+- `POST /auth/google` — Sign in with Google
+- `GET /auth/me` — Get the signed-in user
+- `POST /auth/logout` — End the session
+- `GET /notes` — List notes
+- `POST /notes` — Create a note
+- `PATCH /notes/:id` — Update a note
+- `DELETE /notes/:id` — Delete a note
+- `POST /notes/grammar` — Get grammar suggestions
+- `GET /notes/:id/html` — Get rendered note HTML
+
+- API documentation: [Swagger UI](https://mireth-xyj0.onrender.com/docs)
+- OpenAPI specification: [openapi.json](https://mireth-xyj0.onrender.com/openapi.json)
+
+## Run locally
+
+Requirements: Node.js, pnpm, PostgreSQL, and a Google web client ID. Grammar
+checks also require a Sapling API key.
+
+1. Create a PostgreSQL database.
+2. Add `server/.env` with the following values:
+
+   ```env
+   DATABASE_URL=postgresql://USER:PASSWORD@localhost:5432/DATABASE
+   CLIENT_ORIGINS=http://localhost:5173
+   GOOGLE_CLIENT_ID=YOUR_GOOGLE_CLIENT_ID
+   SAPLING_API_KEY=YOUR_SAPLING_API_KEY
+   SESSION_COOKIE_SAME_SITE=lax
+   TRUST_PROXY=0
+   ```
+
+3. Set `VITE_GOOGLE_CLIENT_ID` in `client/.env` to the same Google client ID.
+   Add `http://localhost:5173` as an authorized JavaScript origin in Google
+   Cloud Console.
+4. Start the API and client in separate terminals:
+
+   ```bash
+   cd server && pnpm install && pnpm db:migrate && pnpm dev
+   ```
+
+   ```bash
+   cd client && pnpm install && pnpm dev
+   ```
+
+Open the Vite URL shown in the client terminal. Keep `.env` files and secrets
+out of Git.
+
+## Checks
+
+```bash
+pnpm --dir client lint && pnpm --dir client build
+pnpm --dir server test && pnpm --dir server build
+```
+
+GitHub Actions runs these checks and validates migration integrity.
+
+## Deployment and data recovery
+
+The client is hosted on Vercel, the API on Render, and PostgreSQL on Neon.
+Configure HTTPS, exact Google OAuth origins, matching client IDs, trusted proxy
+settings, and secrets in the hosting dashboards. Use a pooled Neon URL for the
+API, a migration-capable URL for releases, and enable backups with tested
+restores.
+
+Historical migrations include a destructive table change and duplicate title
+migrations. Do not edit or remove migrations that may already have run. If older
+records are missing, restore a pre-migration Neon backup to a separate database
+and reconcile note ownership before importing. Notes without an owner remain
+hidden from signed-in users.
+
+## Contributing
+
+Focused contributions are welcome. Run the checks above, keep API
+documentation current, and never commit credentials or `.env` files.

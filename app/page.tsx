@@ -1,15 +1,12 @@
 
 
-import RecentPosts from '@/components/recent-post'
-// import  ThemeToggle  from '../components/theme-toggle'
-
-import Intro from '../components/intro'
-import RecentProjects from '@/components/recent-projects'
-import SkillsSection from '@/components/skills'
-import ExperienceSection from '@/components/experience-section'
-import ServicesSection from '@/components/service-section'
-import ContactSection from '@/components/contact-section'
-import NewsletterForm from '@/components/newsletter-form'
+import RecentPosts from '@/components/content/recent-posts'
+import Intro from '@/components/home/intro'
+import RecentProjects from '@/components/content/recent-projects'
+import SkillsSection from '@/components/home/skills'
+import ExperienceSection from '@/components/home/experience-section'
+import ServicesSection from '@/components/home/service-section'
+import ContactSection from '@/components/contact/contact-section'
 
 export default function Home() {
   return (
@@ -20,10 +17,8 @@ export default function Home() {
         <RecentProjects />
         <ServicesSection />
         <SkillsSection />
-        
         <RecentPosts />
         <ContactSection />
-        {/* <NewsletterForm />  for the future*/}
       </div>
     </section>
   )

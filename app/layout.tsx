@@ -3,9 +3,9 @@ import { Inter, Playfair_Display } from 'next/font/google'
 import { cn } from '@/lib/utils'
 
 import './globals.css'
-import Providers from '@/components/providers'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
+import Providers from '@/components/layout/providers'
+import Header from '@/components/layout/header'
+import Footer from '@/components/layout/footer'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 const playfair = Playfair_Display({
@@ -14,7 +14,7 @@ const playfair = Playfair_Display({
 })
 
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Pankaj Yadav | Full-Stack Developer',
   description:
     'Portfolio and personal projects of a full-stack software engineer.'

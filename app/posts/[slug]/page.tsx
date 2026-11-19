@@ -6,8 +6,8 @@ import { formatDate } from '@/lib/utils'
 import { ArrowLeftIcon } from 'lucide-react'
 import { notFound } from 'next/navigation'
 
-import getPostBySlug, { getPosts } from '@/lib/posts'
-import MDXContent from '@/components/mdx-content'
+import getPostBySlug, { getPosts } from '@/lib/content/posts'
+import MDXContent from '@/components/content/mdx-content'
 
 export async function generateStaticParams() {
   const posts = await getPosts()
@@ -15,7 +15,11 @@ export async function generateStaticParams() {
   return slugs
 }
 
-export default async function Post({ params }: { params: { slug: string } }) {
+export default async function Post({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
   const { slug } = await params
   const post = await getPostBySlug(slug)
 
