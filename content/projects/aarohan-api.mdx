@@ -1,0 +1,147 @@
+---
+
+title: Aarohan API
+summary: A scalable and secure backend API built with Node.js, Express, MongoDB, and JWT authentication.
+image: /images/projects/aarohan-api.png
+author: 'Pankaj Yadav'
+publishedAt: '2026-06-14'
+-------------------------
+
+Aarohan API is a **production-ready backend API** built using the **MERN stack**
+to simulate how a modern backend system works in a real-world application.
+
+The platform focuses on secure authentication, role-based authorization,
+content management, admin moderation, analytics, and scalable backend
+architecture. Aarohan API also includes production-level security practices,
+file uploads, and interactive API documentation.
+
+## Features
+
+* **Authentication & Authorization**: Secure signup, login, refresh tokens,
+  OTP-based password reset, and protected routes using JWT
+* **Role-Based Access Control**: Separate permissions for `user` and `admin`
+* **Article Management**: Create, update, delete, publish, search, and filter
+  articles with slug-based URLs
+* **Likes & Bookmarks**: Like, dislike, and save articles for later
+* **Comments System**: Add comments, replies, and nested discussions
+* **Admin Dashboard**: Manage users, moderate articles, and view analytics
+* **File Upload Support**: Secure image uploads with Cloudinary
+* **Security Features**: Helmet, bcrypt, secure cookies, rate limiting, and
+  centralized error handling
+* **API Documentation**: Interactive API testing using Swagger UI
+
+## Technologies
+
+* **MongoDB**: Database for storing application data
+* **Express.js**: Backend framework for REST APIs
+* **Node.js**: Server-side JavaScript runtime
+* **Mongoose**: ODM for MongoDB schema modeling
+* **JWT Authentication**: Secure authentication and authorization
+* **bcrypt**: Password hashing and account security
+* **Zod**: Request validation
+* **Helmet**: Security middleware
+* **Express Rate Limit**: API abuse prevention
+* **Cloudinary**: Cloud image storage
+* **Multer**: File upload handling
+* **Swagger UI**: API documentation
+
+## Project Structure
+
+```txt
+backend/
+│── config/
+│   ├── db.js
+│   ├── env.js
+│   ├── swagger.js
+│   └── cloudinary.js
+│
+│── controllers/
+│── middleware/
+│── models/
+│── routes/
+│── services/
+│── utils/
+│── validators/
+│── server.js
+```
+
+## Getting Started
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+cd backend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+The API will start at:
+
+```text
+http://localhost:5000
+```
+
+## Build for Production
+
+```bash
+npm start
+```
+
+## Main API Routes
+
+### Authentication
+
+```http
+POST   /api/v1/auth/signup
+POST   /api/v1/auth/login
+POST   /api/v1/auth/logout
+POST   /api/v1/auth/refresh-token
+POST   /api/v1/auth/forgot-password
+POST   /api/v1/auth/verify-otp
+POST   /api/v1/auth/reset-password
+GET    /api/v1/auth/profile
+PATCH  /api/v1/auth/profile
+```
+
+### Articles
+
+```http
+POST   /api/v1/articles
+GET    /api/v1/articles
+GET    /api/v1/articles/:slug
+PATCH  /api/v1/articles/:id
+DELETE /api/v1/articles/:id
+GET    /api/v1/articles/trending
+GET    /api/v1/articles/bookmarks
+POST   /api/v1/articles/:id/like
+POST   /api/v1/articles/:id/dislike
+POST   /api/v1/articles/:id/bookmark
+```
+
+### Comments
+
+```http
+POST   /api/v1/articles/:id/comments
+GET    /api/v1/articles/:id/comments
+POST   /api/v1/comments/:id/reply
+PATCH  /api/v1/comments/:id
+DELETE /api/v1/comments/:id
+```
+
+## Conclusion
+
+Aarohan API demonstrates how a scalable and secure backend platform can be
+built using modern backend technologies. With authentication, moderation,
+engagement features, and production-level security, the project reflects
+real-world backend engineering practices.
