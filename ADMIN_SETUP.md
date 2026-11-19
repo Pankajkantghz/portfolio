@@ -16,7 +16,7 @@ ADMIN_PASSWORD=choose-a-long-unique-password
 ADMIN_SESSION_SECRET=generate-a-random-secret-at-least-32-characters-long
 GITHUB_TOKEN=github_pat_your_fine_grained_token
 GITHUB_OWNER=Pankajkantghz
-GITHUB_REPO=portfolio-sample
+GITHUB_REPO=portfolio
 GITHUB_BRANCH=main
 ```
 
